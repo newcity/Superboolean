@@ -1,5 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Superboolean - set one while unsetting all others in a channel
+ *
+ * @author Phil Pelanne
+ */
 class Superboolean_ft extends EE_Fieldtype {
 
     var $info = array(
@@ -8,7 +12,12 @@ class Superboolean_ft extends EE_Fieldtype {
     );
 
     // --------------------------------------------------------------------
-
+	/**
+	 * Display Field in Control Panel
+	 *
+	 * @param string $data 
+	 * @return void
+	 */
     function display_field($data)
     {
 		$options = array(
@@ -21,7 +30,12 @@ class Superboolean_ft extends EE_Fieldtype {
         
     }
 
-	
+	/**
+	 * Unset all the other entries in the channel after save
+	 *
+	 * @param string $data 
+	 * @return void
+	 */
 	function post_save($data){
 		if ($data) {
 			list($superboolean,$channel_id) = explode('|', $data);
