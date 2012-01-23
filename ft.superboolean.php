@@ -40,8 +40,9 @@ class Superboolean_ft extends EE_Fieldtype {
 		if ($data) {
 			list($superboolean,$channel_id) = explode('|', $data);
 			if ($superboolean==1 && is_numeric($this->EE->input->post('channel_id')) && is_numeric($this->settings['entry_id']) ) {	
-				$sql = 'update exp_channel_data set '.$this->field_name.' = \'\' where channel_id='.$this->EE->input->post('channel_id').' and entry_id != '.$this->settings['entry_id'];
-				$query = $this->EE->db->query($sql);		
+				$this->EE->db->where('channel_id', $this->EE->input->post('channel_id'));
+				$this->EE->db->where('entry_id !=', $this->settings['entry_id']);
+				$this->EE->db->update('exp_channel_data', array($this->field_name => ''));
 			}
 		}
 		
